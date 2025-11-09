@@ -3,11 +3,44 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+<!--    mvn clean deploy -X -s "C:\Users\lam\.m2\settings.xml"-->
 
-    <groupId>lamdepzai</groupId>
-    <artifactId>Jpalam</artifactId>
+    <groupId>io.github.ln678090</groupId>
+    <artifactId>Jpalamdepzai</artifactId>
     <version>1.0-SNAPSHOT</version>
-<dependencies>
+    <packaging>jar</packaging>
+    <name>JpaUtil</name>
+    <description>Thư viện JPA tiện ích của ln678090</description>
+    <url>https://github.com/ln678090/jpalam</url>
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub Packages</name>
+            <url>https://maven.pkg.github.com/ln678090/jpalam</url>
+        </repository>
+    </distributionManagement>
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://opensource.org/licenses/MIT</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>ln678090</id>
+            <name>Lam</name>
+            <email>ln678090@gmail.com</email>
+        </developer>
+    </developers>
+
+    <scm>
+        <url>https://github.com/ln678090/jpalam</url>
+        <connection>scm:git:https://github.com/ln678090/jpalam.git</connection>
+        <developerConnection>scm:git:https://github.com/ln678090/jpalam.git</developerConnection>
+    </scm>
+
+    <dependencies>
     <dependency>
         <groupId>jakarta.persistence</groupId>
         <artifactId>jakarta.persistence-api</artifactId>
