@@ -17,6 +17,32 @@ public class JpaRepositoryimpl<T, ID> implements JpaRepository<T, ID> {
         this.entityClass = entityClass;
     }
 
+    public <R> R executeQuery(String jpql, Class<R> resultClass, Object... params) {
+        EntityManager em = getEntityManager();
+        try {
+            var query = em.createQuery(jpql, resultClass);
+            for (int i = 0; i < params.length; i++) {
+                query.setParameter(i + 1, params[i]);
+            }
+            return query.getSingleResult();
+        } finally {
+            em.close();
+        }
+    }
+
+    public <R> List<R> executeQueryList(String jpql, Class<R> resultClass, Object... params) {
+        EntityManager em = getEntityManager();
+        try {
+            var query = em.createQuery(jpql, resultClass);
+            for (int i = 0; i < params.length; i++) {
+                query.setParameter(i + 1, params[i]);
+            }
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
     private EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
