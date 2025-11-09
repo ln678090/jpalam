@@ -7,7 +7,7 @@
 
     <groupId>io.github.ln678090</groupId>
     <artifactId>jpalamsuidepzai</artifactId>
-    <version>1.0.0.1-SNAPSHOT</version>
+    <version>1.0.0.2-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>JpaUtil</name>
     <description>Thư viện JPA tiện ích của ln678090</description>
