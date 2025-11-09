@@ -6,17 +6,17 @@
 <!--    mvn clean deploy -X -s "C:\Users\lam\.m2\settings.xml"-->
 
     <groupId>io.github.ln678090</groupId>
-    <artifactId>Jpalamdepzai</artifactId>
+    <artifactId>jpalamsuidepzai</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>JpaUtil</name>
     <description>Thư viện JPA tiện ích của ln678090</description>
-    <url>https://github.com/ln678090/jpalam</url>
+    <url>https://github.com/ln678090/jpalamsuidepzai</url>
     <distributionManagement>
         <repository>
             <id>github</id>
             <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/ln678090/jpalam</url>
+            <url>https://maven.pkg.github.com/ln678090/jpalamsuidepzai</url>
         </repository>
     </distributionManagement>
     <licenses>
@@ -35,9 +35,9 @@
     </developers>
 
     <scm>
-        <url>https://github.com/ln678090/jpalam</url>
-        <connection>scm:git:https://github.com/ln678090/jpalam.git</connection>
-        <developerConnection>scm:git:https://github.com/ln678090/jpalam.git</developerConnection>
+        <url>https://github.com/ln678090/jpalamsuidepzai</url>
+        <connection>scm:git:https://github.com/ln678090/jpalamsuidepzai.git</connection>
+        <developerConnection>scm:git:https://github.com/ln678090/jpalamsuidepzai.git</developerConnection>
     </scm>
 
     <dependencies>
