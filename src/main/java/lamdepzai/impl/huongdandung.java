@@ -1,16 +1,26 @@
-////package lamdepzai.reponsitory;
-////
-////import lamdepzai.entity.User;
-////import lamdepzai.query.Query;
-////
-////import java.util.Optional;
-////
-////public interface UserRepository extends JpaRepository<User, Integer> {
-////    @Query("select u from User u where u.email = ?1 or u.userName = ?1")
-////    Optional<User> findByUsernameOrEmail(String usernameOrEmail);
-////}
+//import jakarta.persistence.EntityManager;
+//import jakarta.persistence.EntityManagerFactory;
+//import jakarta.persistence.Persistence;
+//import lamdepzai.query.RepositoryFactory;
+//
+//EntityManagerFactory emf = Persistence.createEntityManagerFactory("ASMJAVA4v2");
+//GenericRepository<Room, Integer> roomRepository = new GenericRepositoryImpl<>(emf, Room.class);
+//List<Room> rooms = roomRepository.findAll();
+//roomRepository.save(room);
+//roomRepository.delete(room);
+//
+//
+//
+//EntityManagerFactory emf = Persistence.createEntityManagerFactory("ASMJAVA4v2");
+//EntityManager em = emf.createEntityManager();
+//
+//UserRepository userRepository = RepositoryFactory.createRepository(UserRepository.class, em, User.class);
+//
+//Optional<User> user = userRepository.findByUsernameOrEmail("someone@example.com");
+//
+//
 //<%@ page language="java" contentType="text/html; charset=UTF-8"
-//pageEncoding="UTF-8"%>
+//    pageEncoding="UTF-8"%>
 //      <%@ taglib uri="jakarta.tags.core" prefix="c"%>
 //<%@ taglib uri="jakarta.tags.fmt" prefix="fmt"%>
 //<%@ taglib uri="jakarta.tags.functions" prefix="fn"%>
@@ -20,8 +30,8 @@
 //<meta charset="UTF-8">
 //<title>Insert title here</title>
 //<link
-//href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-//rel="stylesheet">
+//	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+//	rel="stylesheet">
 //</head>
 //<body>
 //
@@ -78,4 +88,4 @@
 //</table>
 //
 //</body>
-////</html>
+//</html>
