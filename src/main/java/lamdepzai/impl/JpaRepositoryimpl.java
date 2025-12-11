@@ -16,7 +16,7 @@ public class JpaRepositoryimpl<T, ID> implements JpaRepository<T, ID> {
         this.emf = emf;
         this.entityClass = entityClass;
     }
-
+    @Override
     public <R> R executeQuery(String jpql, Class<R> resultClass, Object... params) {
         EntityManager em = getEntityManager();
         try {
@@ -39,7 +39,7 @@ public class JpaRepositoryimpl<T, ID> implements JpaRepository<T, ID> {
         }
     }
 
-
+    @Override
     public <R> List<R> executeQueryList(String jpql, Class<R> resultClass, Object... params) {
         EntityManager em = getEntityManager();
         try {
@@ -111,6 +111,97 @@ public class JpaRepositoryimpl<T, ID> implements JpaRepository<T, ID> {
         } catch (RuntimeException ex) {
             em.getTransaction().rollback();
             throw ex;
+        } finally {
+            em.close();
+        }
+    }
+
+    /**
+     * @return Số bản ghi
+     */
+    @Override
+    public long count() {
+        EntityManager em = getEntityManager();
+        try {
+            return em.createQuery(
+                    "SELECT COUNT(e) FROM " + entityClass.getSimpleName() + " e",
+                    Long.class
+            ).getSingleResult();
+        } finally {
+            em.close();
+        }
+    }
+    /**
+     * @param pageNumber Số trang
+     * @param pageSize Số bản ghi
+     * @return Danh sách bản ghi
+     */
+    @Override
+    public List<T> findAllPage(int pageNumber, int pageSize) {
+        EntityManager em = getEntityManager();
+        try {
+            return em.createQuery(
+                            "SELECT e FROM " + entityClass.getSimpleName() + " e",
+                            entityClass
+                    )
+                    .setFirstResult(pageNumber * pageSize)  // OFFSET
+                    .setMaxResults(pageSize)                // LIMIT
+                    .getResultList();
+        } finally {
+            em.close();
+        }
+    }
+    /**
+     * @param jpql lệnh JPQL truy vấn
+     * @param resultClass Loại kết quả
+     * @param pageNumber Số trang
+     * @param pageSize Số bản ghi
+     * @param params Tham số
+     * @return Danh sách bản ghi
+     */
+    @Override
+    public <R> List<R> executeQueryWithPagination(
+            String jpql,
+            Class<R> resultClass,
+            int pageNumber,
+            int pageSize,
+            Object... params) {
+        EntityManager em = getEntityManager();
+        try {
+            var query = em.createQuery(jpql, resultClass);
+
+            // Set parameters
+            for (int i = 0; i < params.length; i++) {
+                query.setParameter(i + 1, params[i]);
+            }
+
+            return query
+                    .setFirstResult(pageNumber * pageSize)
+                    .setMaxResults(pageSize)
+                    .getResultList();
+        } finally {
+            em.close();
+        }
+    }
+    /**
+     * @param jpql lệnh JPQL truy vấn
+     * @param params Tham số
+     * @return Số bản ghi
+     */
+    @Override
+    public long countQuery(String jpql, Object... params) {
+        EntityManager em = getEntityManager();
+        try {
+            // Chuyển SELECT ... FROM thành SELECT COUNT(*) FROM
+            String countJpql = jpql.replaceFirst("(?i)SELECT .+ FROM", "SELECT COUNT(*) FROM");
+
+            var query = em.createQuery(countJpql, Long.class);
+
+            for (int i = 0; i < params.length; i++) {
+                query.setParameter(i + 1, params[i]);
+            }
+
+            return query.getSingleResult();
         } finally {
             em.close();
         }
