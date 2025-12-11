@@ -8,7 +8,7 @@ public interface JpaRepository<T, ID> {
     Optional<T> findById(ID id);
     T save(T entity);    // add hoặc update
     void delete(T entity);
-    List<T> findAll(int pageNumber, int pageSize);
+
     long count();
     <R> R executeQuery(String jpql, Class<R> resultClass, Object... params);
     <R> List<R> executeQueryList(String jpql, Class<R> resultClass, Object... params);
